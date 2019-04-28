@@ -18,6 +18,7 @@
 							<th class="numeric">Status</th>
 							<th class="numeric">Tanggal Pinjam</th>
 							<th class="numeric">Tanggal Kembali</th>
+							<th class="numeric text-center" colspan="2">OPSI</th>
 						</tr>
 					</thead>
 					<tbody id="show_data">
@@ -37,6 +38,12 @@
 							<?php endif; ?>
 							<td><?= $p->tgl_pinjam ?></td>
 							<td><?= $p->tgl_kembali ?></td>
+							<td>
+								<button type="button" class="btn btn-success" onclick="window.location.href='<?= base_url('home/edit/') . $p->id_pinjaman ?>'">EDIT</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-danger" onclick="return hapus(<?= $p->id_pinjaman ?>);">HAPUS</button>
+							</td>
 						</tr>
 						<?php $no++; ?>
 						<?php endforeach; ?>
@@ -88,3 +95,52 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="editpinjaman" tabindex="-1" role="dialog" aria-labelledby="editpinjamanLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="editpinjamanLabel">Modal title</h5>
+			</div>
+			<div class="modal-body">
+				<form action="<?= base_url('home/add') ?>" method="post">
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group">
+								<label class="col-sm-2 col-sm-2 control-label">PILIH BARANG</label>
+								<div class="col-sm-10">
+									<select class="form-control" name="id_barang">
+										<?php foreach ($barang as $b ) : ?>
+											<option value="<?= $b->id_barang ?>"><?= $b->nama_barang ?></option>
+										<?php endforeach; ?>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group">
+								<label class="col-sm-2 col-sm-2 control-label">TANGGAL KEMBALI</label>
+								<div class="col-sm-10">
+									<input type="date" name="tgl_kembali" id="tgl_kembali">
+								</div>
+							</div>
+						</div>
+					</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-primary">Save changes</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	function hapus(id) {
+		if (confirm('Apakah anda yakin menghapus ?')) {
+			window.location.href="<?= base_url('home/delete/') ?>" + id
+		}
+	}
+</script>
