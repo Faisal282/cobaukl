@@ -20,7 +20,8 @@ class Login extends CI_Controller {
                 'username' => $this->input->post('username'),
                 'password' => $this->input->post('password')
             );
-            if ($this->login_model->cekLogin($data) != false) {
+            $cek = $this->login_model->cekLogin($data);
+            if ($cek != null) {
                 $query = $this->login_model->cekLogin($data)[0];
                 $this->session->set_userdata('logged_in', TRUE);
                 $this->session->set_userdata('nama_user', $query['nama_user']);
@@ -28,15 +29,19 @@ class Login extends CI_Controller {
                 $this->session->set_userdata('level', $query['level']);
                 $this->session->set_userdata('id_peminjam', $query['id_user']);
             }
-            // redirect('user','refresh');
+            redirect('home','refresh');
         }
     }
     public function logout()
     {
         unset(
             $_SESSION['logged_in'], 
-            $_SESSION['status']
+            $_SESSION['level'],
+            $_SESSION['nama_user'],
+            $_SESSION['username'],
+            $_SESSION['id_peminjam']
         );
+        $this->session->sess_destroy();
         
         redirect('login/index','refresh');
         

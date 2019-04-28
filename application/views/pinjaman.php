@@ -4,8 +4,10 @@
 		<?php if ($this->session->flashdata('message') != null) : ?>
 			<div class="alert alert-danger"><b>Warning!</b> Better check yourself, you're not looking too good.</div>
 		<?php endif; ?>
+		<?php if ($_SESSION['level'] == 2 || $_SESSION['level'] == 0) : ?>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahmodal">Tambah
 			Pinjaman</button>
+		<?php endif; ?>
 		<div class="content-panel">
 			<section id="unseen">
 				<table class="table table-bordered table-striped table-condensed" id="mydata">
@@ -18,7 +20,11 @@
 							<th class="numeric">Status</th>
 							<th class="numeric">Tanggal Pinjam</th>
 							<th class="numeric">Tanggal Kembali</th>
+							<?php if($_SESSION['level'] == 2) : ?>
 							<th class="numeric text-center" colspan="2">OPSI</th>
+							<?php elseif($_SESSION['level'] == 1) : ?>
+							<th class="numeric text-center">OPSI</th>
+							<?php endif; ?>
 						</tr>
 					</thead>
 					<tbody id="show_data">
@@ -30,7 +36,7 @@
 							<td><?= $p->nama_jenis ?></td>
 							<td><?= $p->nama_user ?></td>
 							<?php if ($p->status == 0) : ?>
-							<td>kosong</td>
+							<td>menunggu konfirmasi</td>
 							<?php elseif($p->status == 1) : ?>
 							<td>dalam peminjaman</td>
 							<?php else: ?>
@@ -38,12 +44,26 @@
 							<?php endif; ?>
 							<td><?= $p->tgl_pinjam ?></td>
 							<td><?= $p->tgl_kembali ?></td>
-							<td>
+							<?php if($_SESSION['level'] == 2) : ?>
+							<td class='text-center'>
 								<button type="button" class="btn btn-success" onclick="window.location.href='<?= base_url('home/edit/') . $p->id_pinjaman ?>'">EDIT</button>
 							</td>
-							<td>
+							<td class='text-center'>
 								<button type="button" class="btn btn-danger" onclick="return hapus(<?= $p->id_pinjaman ?>);">HAPUS</button>
 							</td>
+							<?php elseif($_SESSION['level'] == 1) : ?>
+							<td class='text-center'>
+								<?php if ($p->status == 0) : ?>
+								<button type="button" class="btn btn-success" onclick="return konfirmasi(<?= $p->id_pinjaman ?>);">
+									KONFIRMASI
+								</button>
+								<?php elseif($p->status == 1) : ?>
+								<button type="button" class="btn btn-success" onclick="return kembali(<?= $p->id_pinjaman ?>);">
+									KEMBALI
+								</button>
+								<?php endif; ?>
+							</td>
+							<?php endif; ?>
 						</tr>
 						<?php $no++; ?>
 						<?php endforeach; ?>
@@ -64,7 +84,7 @@
 				<form action="<?= base_url('home/add') ?>" method="post">
 					<div class="row">
 						<div class="col-12">
-							<div class="form-group">
+							<div class="form-group">	
 								<label class="col-sm-2 col-sm-2 control-label">PILIH BARANG</label>
 								<div class="col-sm-10">
 									<select class="form-control" name="id_barang">
@@ -141,6 +161,16 @@
 	function hapus(id) {
 		if (confirm('Apakah anda yakin menghapus ?')) {
 			window.location.href="<?= base_url('home/delete/') ?>" + id
+		}
+	}
+	function konfirmasi(id) {
+		if (confirm('Apakah anda yakin konfirmasi ?')) {
+			window.location.href="<?= base_url('home/konfirmasi/') ?>" + id
+		}
+	}
+	function kembali(id) {
+		if (confirm('Apakah anda yakin kembali ?')) {
+			window.location.href="<?= base_url('home/kembali/') ?>" + id
 		}
 	}
 </script>

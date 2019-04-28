@@ -11,8 +11,8 @@
 				<table class="table table-bordered table-striped table-condensed">
 					<thead>
 						<tr>
-							<th>NO</th>
-							<th class="numeric">Nomer Lemari</th>
+							<th class="text-center">NO</th>
+							<th class="numeric text-center">Nomer Lemari</th>
 							<th class="numeric text-center">OPSI</th>
 						</tr>
 					</thead>
@@ -20,8 +20,8 @@
 						<?php $no=1; ?>
 						<?php foreach ($lemari as $l ) : ?>
 						<tr>
-							<td><?= $no ?></td>
-							<td><?= $l->no_lemari ?></td>
+							<td class="text-center"><?= $no ?></td>
+							<td class="text-center"><?= $l->no_lemari ?></td>
 							<td class="text-center">
 							<button type="button" class="btn btn-danger" onclick="return hapus(<?= $l->id_lemari ?>);">HAPUS</button>
 							</td>

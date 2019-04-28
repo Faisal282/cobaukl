@@ -35,7 +35,7 @@
 	<div id="login-page">
 		<div class="container">
 
-			<form class="form-login" action="<?= base_url('index.php/Login/index') ?>" method="post">
+			<form class="form-login" action="<?= base_url('Login') ?>" method="post">
 				<h2 class="form-login-heading">sign in now</h2>
 				<div class="login-wrap">
 					<input type="text" class="form-control" placeholder="username" autofocus name="username">

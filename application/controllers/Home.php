@@ -27,7 +27,7 @@ class Home extends CI_Controller {
         $data = array(
             'id_barang' => $this->input->post('id_barang'),
             'id_peminjam' => $_SESSION['id_peminjam'],
-            'status' => 1,
+            'status' => 0,
             'tgl_pinjam' => date('Y-m-d H:i:s'),
             'tgl_kembali' => $this->input->post('tgl_kembali')
         );
@@ -57,6 +57,18 @@ class Home extends CI_Controller {
             $this->Pinjaman_model->editPinjaman($id);
             redirect('home/index','refresh');
         } 
+    }
+
+    public function konfirmasi($id)
+    {
+        $this->Pinjaman_model->konfirmasi($id);
+        redirect('home','refresh');
+    }
+
+    public function kembali($id)
+    {
+        $this->Pinjaman_model->kembali($id);
+        redirect('home','refresh');
     }
 
     public function delete($id)

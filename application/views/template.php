@@ -1,7 +1,3 @@
-<?php
-// var_dump($pinjaman);die;
-?>
-<?php if ($_SESSION['level'] == 0) : ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -188,8 +184,17 @@
 				<!-- sidebar menu start-->
 				<ul class="sidebar-menu" id="nav-accordion">
 					<p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle"
-								width="60"></a></p>
-					<h5 class="centered">Marcel Newman</h5>
+					width="60"></a></p>
+					<h5 class="centered"><?= $_SESSION['nama_user'] ?></h5>
+					<?php if ($_SESSION['level'] == 0) : ?>
+					<li class="mt">
+						<a class="active" href="<?= base_url('home') ?>">
+							<i class="fa fa-dashboard"></i>
+							<span>Pinjam Data</span>
+						</a>
+					</li>
+					<?php endif; ?>
+					<?php if ($_SESSION['level'] == 1 || $_SESSION['level'] == 2) : ?>
 					<li class="mt">
 						<a class="active" href="<?= base_url('home') ?>">
 							<i class="fa fa-dashboard"></i>
@@ -202,6 +207,8 @@
 							<span>Data Barang</span>
 						</a>
 					</li>
+					<?php endif; ?>
+					<?php if ($_SESSION['level'] == 2) : ?>
 					<li class="mt">
 						<a href="<?= base_url('lemari') ?>">
 							<i class="fa fa-dashboard"></i>
@@ -220,6 +227,7 @@
 							<span>Daftar User</span>
 						</a>
 					</li>
+					<?php endif; ?>
 				</ul>
 				<!-- sidebar menu end-->
 			</div>
@@ -266,24 +274,24 @@
 	<script src="<?= base_url('') ?>assets/js/zabuto_calendar.js"></script>
 
 	<script type="text/javascript">
-		$(document).ready(function () {
-			var unique_id = $.gritter.add({
-				// (string | mandatory) the heading of the notification
-				title: 'Welcome to Dashgum!',
-				// (string | mandatory) the text inside the notification
-				text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo. Free version for <a href="http://blacktie.co" target="_blank" style="color:#ffd777">BlackTie.co</a>.',
-				// (string | optional) the image to display on the left
-				image: 'assets/img/ui-sam.jpg',
-				// (bool | optional) if you want it to fade out on its own or just sit there
-				sticky: true,
-				// (int | optional) the time you want it to be alive for before fading out
-				time: '',
-				// (string | optional) the class name you want to apply to that specific message
-				class_name: 'my-sticky-class'
-			});
+		// $(document).ready(function () {
+		// 	var unique_id = $.gritter.add({
+		// 		// (string | mandatory) the heading of the notification
+		// 		title: 'Welcome to Dashgum!',
+		// 		// (string | mandatory) the text inside the notification
+		// 		text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo. Free version for <a href="http://blacktie.co" target="_blank" style="color:#ffd777">BlackTie.co</a>.',
+		// 		// (string | optional) the image to display on the left
+		// 		image: 'assets/img/ui-sam.jpg',
+		// 		// (bool | optional) if you want it to fade out on its own or just sit there
+		// 		sticky: true,
+		// 		// (int | optional) the time you want it to be alive for before fading out
+		// 		time: '',
+		// 		// (string | optional) the class name you want to apply to that specific message
+		// 		class_name: 'my-sticky-class'
+		// 	});
 
-			return false;
-		});
+		// 	return false;
+		// });
 
 	</script>
 
@@ -334,4 +342,3 @@
 </body>
 
 </html>
-<?php endif; ?>
