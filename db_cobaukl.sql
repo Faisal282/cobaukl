@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2019 at 11:10 AM
+-- Generation Time: Apr 28, 2019 at 01:38 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.3
 
@@ -40,9 +40,10 @@ CREATE TABLE `data_barang` (
 --
 
 INSERT INTO `data_barang` (`id_barang`, `nama_barang`, `jenis_barang`, `lemari`) VALUES
-(1, 'Pensil', 1, 1),
+(1, 'Pensila', 1, 1),
 (2, 'Penghapus', 1, 2),
-(3, 'Kabel VGA', 2, 1);
+(3, 'Kabel VGA', 2, 1),
+(5, 'Bolpoint', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -64,13 +65,19 @@ CREATE TABLE `data_pinjaman` (
 --
 
 INSERT INTO `data_pinjaman` (`id_pinjaman`, `id_barang`, `id_peminjam`, `status`, `tgl_pinjam`, `tgl_kembali`) VALUES
-(1, 3, 1, 0, NULL, NULL),
-(2, 3, 4, 0, '2019-04-27 11:08:26', '2019-04-27 11:08:26'),
+(2, 3, 4, 1, '2019-04-27 11:08:26', '2019-04-27 11:08:26'),
 (3, 2, 4, 2, '2019-04-27 11:30:40', '2019-04-27 11:30:25'),
 (4, 1, NULL, 1, '2019-04-27 15:58:48', '2019-04-02 00:00:00'),
 (5, 3, 1, 1, '2019-04-27 16:04:59', '2019-04-02 00:00:00'),
-(6, 2, 4, 1, '2019-04-27 16:07:07', '2019-04-01 00:00:00'),
-(7, 3, 4, 1, '2019-04-27 16:08:20', '2019-04-29 00:00:00');
+(6, 2, 4, 2, '2019-04-27 16:07:07', '2019-04-01 00:00:00'),
+(7, 3, 4, 1, '2019-04-27 16:08:20', '2019-04-29 00:00:00'),
+(8, 3, 1, 1, '2019-04-28 09:50:32', '2019-04-30 00:00:00'),
+(9, 2, 1, 1, '2019-04-28 09:59:03', '2019-04-30 00:00:00'),
+(10, 3, 4, 2, '2019-04-28 09:59:44', '2019-04-30 00:00:00'),
+(11, 3, 1, 2, '2019-04-28 16:51:39', '2019-04-29 00:00:00'),
+(13, 5, 1, 2, '2019-04-28 17:54:46', '2019-02-02 00:00:00'),
+(14, 3, 1, 1, '2019-04-28 17:55:51', '2019-11-01 00:00:00'),
+(15, 3, 1, 2, '2019-04-28 17:57:06', '2019-04-30 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -89,7 +96,8 @@ CREATE TABLE `jenis_barang` (
 
 INSERT INTO `jenis_barang` (`id_jenis_barang`, `nama_jenis`) VALUES
 (1, 'ALAT TULIS'),
-(2, 'PERANGKAT KERAS');
+(2, 'PERANGKAT KERAS'),
+(4, 'SOFTWARE');
 
 -- --------------------------------------------------------
 
@@ -108,7 +116,8 @@ CREATE TABLE `lemari` (
 
 INSERT INTO `lemari` (`id_lemari`, `no_lemari`) VALUES
 (1, 1),
-(2, 2);
+(2, 2),
+(3, 3);
 
 -- --------------------------------------------------------
 
@@ -130,9 +139,10 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `nama_user`, `username`, `password`, `level`) VALUES
 (1, 'faisal affan', 'faisal', '12345', 0),
-(2, 'risma', 'risma', 'risma', 0),
+(2, 'risma', 'risma', 'risma', 2),
 (3, 'rismay', 'rismay', '112233', 0),
-(4, 'risma ayu', 'rismaads', 'risma', 0);
+(4, 'risma ayu', 'rismaads', 'risma', 0),
+(5, 'Fadlurrohman S.M', 'Fadluri', '332211', 1);
 
 --
 -- Indexes for dumped tables
@@ -180,31 +190,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `data_barang`
 --
 ALTER TABLE `data_barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `data_pinjaman`
 --
 ALTER TABLE `data_pinjaman`
-  MODIFY `id_pinjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_pinjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `jenis_barang`
 --
 ALTER TABLE `jenis_barang`
-  MODIFY `id_jenis_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_jenis_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `lemari`
 --
 ALTER TABLE `lemari`
-  MODIFY `id_lemari` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_lemari` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
